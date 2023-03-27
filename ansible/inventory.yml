@@ -1,5 +1,5 @@
 all:
-   hosts:
-     Ubuntu:
-       ansible_user: root
-       ansible_port: 22
+  hosts:
+    192.168.1.112:
+      ansible_user: chyngyz
+      ansible_port: 22
