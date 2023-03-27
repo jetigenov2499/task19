@@ -1,5 +1,6 @@
 all:
-  hosts:
-    127.0.0.1:
-      ansible_user: chyngyz
-      ansible_port: 2222
+   hosts:
+     ubuntu:
+         ansible_ssh_host= 192.168.1.112
+         ansible_ssh_port= 2222
+         ansible_ssh_user= chyngyz
