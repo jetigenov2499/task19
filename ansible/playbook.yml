@@ -1,0 +1,51 @@
+---
+- hosts: all
+- name: Install Docker
+  hosts: all
+  become: true
+  tasks:
+    - name: Install Docker dependencies
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg-agent
+          - software-properties-common
+        state: present
+
+    - name: Add Docker GPG key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker APT repository
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+        state: present
+
+    - name: Install Docker
+      apt:
+        name: docker-ce
+        state: present
+
+    - name: Start Docker service
+      service:
+        name: docker
+- name: Deploy my-app container
+  hosts: all
+  become: true
+  tasks:
+    - name: Pull Docker image from Docker Hub
+      docker_image:
+        name: "{{ DOCKER_USERNAME }}/webui"
+        source: pull
+
+    - name: Start Docker container
+      docker_container:
+        name: webui
+        image: "{{ DOCKER_USERNAME }}/webui"
+        state: started
+        enabled: yes
+        ports:
+          - "80:80"

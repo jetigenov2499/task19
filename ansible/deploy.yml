@@ -1,0 +1,16 @@
+- name: Deploy application
+  hosts: all
+  become: true
+  tasks:
+    - name: Pull Docker image from Docker Hub
+      docker_image:
+        name: chyngyz91/webui
+        tag: latest
+        pull: yes
+    - name: Start Docker container
+      docker_container:
+        name: webui
+        image: chyngyz91/webui
+        state: started
+        ports:
+          - "80:80"

@@ -1,0 +1,4 @@
+all:
+   hosts:
+     Ubuntu:
+       ansible_host: '{{ lookup("env","prod_ip_ubuntu") }}'

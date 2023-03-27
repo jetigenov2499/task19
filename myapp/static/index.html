@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web UI</title>
+  </head>
+  <body>
+    <form id="api-form">
+      <input type="text" id="api-url" name="api-url">
+      <label for="api-url">API Endpoint</label>
+      <br><br>
+      <input type="text" id="name" name="name">
+      <label for="name"> Your Name</label>
+      <br><br>
+      <input type="button" value="Submit" onclick="getHelloMessage()">
+    </form>
+    <br>
+    <label for="response">Server Response</label> <br>
+    <textarea id="response" rows="4" cols="45" readonly></textarea>
+
+    <script>
+      function getHelloMessage() {
+        const apiURL = document.querySelector('#api-url').value;
+        const name = document.querySelector('#name').value;
+        const url = `${apiURL}?name=${name}`;
+
+        fetch(url)
+          .then(response => response.text())
+          .then(data => {
+            const responseTextArea = document.querySelector('#response');
+            responseTextArea.textContent = `Hello ${name}!`;
+          })
+          .catch(error => {
+            const responseTextArea = document.querySelector('#response');
+            responseTextArea.textContent = `Error: "API server"`;
+          });
+      }
+    </script>
+  </body>
+</html>
