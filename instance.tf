@@ -2,9 +2,9 @@ provider "aws" {
   region = "eu-north-1"
 }
 
-resource "aws_instance" "myappaws" {
-  ami           = "ami-02f3f602d23f1659d"
-  instance_type = "t2.micro"
+resource "aws_instance" "instance1" {
+  ami           = "ami-0cf72be2f86b04e9b"
+  instance_type = "t3.micro"
     tags = {
     "Name" = "Linux"
   }
